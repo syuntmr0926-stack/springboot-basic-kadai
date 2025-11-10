@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ToDOリスト</title>
+</head>
+<body>
+    <h2>ToDoタスク登録フォーム</h2>
+    <form th:action="@{/register}" method="post">
+        <label for="title">タイトル：</label>
+        <input type="text" id="title" name="title" th:value="${title}"><br>
+
+        <label for="priority">優先度：</label>
+        <select id="priority" name="priority">
+            <option value="1" th:selected="${priority == 1}">高</option>
+            <option value="2" th:selected="${priority == 2}">中</option>
+            <option value="3" th:selected="${priority == 3}">低</option>
+        </select>
+        
+        <label for="status">ステータス：</label>
+        <select id="status" name="status">
+            <option value="1" th:selected="${status == 1}">未着手</option>
+            <option value="2" th:selected="${status == 2}">着手中</option>
+        </select>
+        <button type="submit">登録</button>
+    </form>
+    
+    <h2>ToDoリスト</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>タイトル</th>
+                <th>優先度</th>
+                <th>ステータス</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="toDo : ${todos}">
+                <td th:text="${toDo.todoId}"></td>
+                <td th:text="${toDo.title}"></td>
+                <td th:text="${toDo.priority}"></td>
+                <td th:text="${toDo.status}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
